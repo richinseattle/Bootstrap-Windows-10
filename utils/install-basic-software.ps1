@@ -4,29 +4,18 @@
 # into your default drive's root directory.
 
 $packages = @(
-    "notepadplusplus.install"
-    "peazip.install"
-    #"7zip.install"
-    #"aimp"
-    #"audacity"
-    #"autoit"
-    #"classic-shell"
-    #"filezilla"
-    #"firefox"
-    #"gimp"
-    #"google-chrome-x64"
-    #"imgburn"
-    #"keepass.install"
-    #"paint.net"
-    #"putty"
-    #"python"
-    #"qbittorrent"
-    #"speedcrunch"
-    #"sysinternals"
-    #"thunderbird"
-    #"vlc"
-    #"windirstat"
-    #"wireshark"
+    "curl"
+    "cmake"
+    "7zip"
+    "SublimeText3"
+    "classic-shell"
+    "google-chrome-x64"
+    "paint.net"
+    "putty"
+    "python"
+    "sysinternals"
+    "vlc"
+    "wireshark"
 )
 
 echo "Setting up Chocolatey software package manager"
@@ -51,11 +40,4 @@ Register-ScheduledJob @ScheduledJob
 echo "Installing Packages"
 $packages | %{choco install $_ --force -y}
 
-echo "Installing Sysinternals Utilities to C:\Sysinternals"
-$download_uri = "https://download.sysinternals.com/files/SysinternalsSuite.zip"
-$wc = new-object net.webclient
-$wc.DownloadFile($download_uri, "/SysinternalsSuite.zip")
-Add-Type -AssemblyName "system.io.compression.filesystem"
-[io.compression.zipfile]::ExtractToDirectory("/SysinternalsSuite.zip", "/Sysinternals")
-echo "Removing zipfile"
-rm "/SysinternalsSuite.zip"
+setx PATH "%PATH%;c:\programdata\chocolatey\bin;C:\Program Files\CMake\bin"
